@@ -1,9 +1,14 @@
 <template>
   <div>
     <div>
-      <a href="#" @click.prevent="getChildren">X</a>
+      <a class="expando-button" href="#" @click.prevent="toggleExpanded">
+        <span v-if="!expanded">➤</span>
+        <span v-if="expanded">▼</span>
+      </a>
+
       <span>{{ message.content }}</span>
     </div>
+
 
     <div class="children">
       <ChatNode v-for="child in children" v-bind:key="child.id" :message="child" />
@@ -28,14 +33,21 @@ export default {
   },
   data() {
     return {
-      children: []
+      children: [],
+      expanded: false
     }
   },
   methods: {
-    async getChildren() {
+    async toggleExpanded() {
+      this.expanded = !this.expanded;
+
+      if (!this.expanded) {
+        this.children = [];
+        return;
+      }
+
       const { data } = await messageHttpService.getMessages(this.message.id);
       this.children = data;
-      console.log(this.children)
     }
   }
 }
@@ -46,7 +58,12 @@ a {
   padding-right: 16px;
 }
 
+.expando-button {
+  width: 16px;
+  display: inline-block;
+}
+
 .children {
-  padding-left: 64px;
+  padding-left: 32px;
 }
 </style>
