@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="message" placeholder="Be nice!" type="text" />
+    <input v-model="message" placeholder="Be nice!" type="text" v-on:keydown="validateText" />
     <button @click="sendMessage">Send</button>
   </div>
 </template>
@@ -24,10 +24,26 @@ export default {
   },
   methods: {
     async sendMessage() {
-      await messageHttpService.postMessage(this.parentId, { content: this.message })
+      if (this.validateText()) {
+        return
+      }
 
-      this.message = ""
-      this.$emit("newMessage")
+      let result = await messageHttpService.postMessage(this.parentId, { content: this.message })
+
+      if (result.status === 200) {
+        this.message = ""
+        this.$emit("newMessage")
+      }
+    },
+    validateText() {
+      const maxLength = 140
+      let tooLong = this.message.length > maxLength
+
+      if (tooLong) {
+        this.message = this.message.substring(0, maxLength)
+      }
+
+      return tooLong
     }
   }
 }
