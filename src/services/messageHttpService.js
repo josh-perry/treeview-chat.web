@@ -2,8 +2,11 @@ import axios from "axios";
 
 class MessageHttpService {
   constructor() {
+    const base = process.env.VUE_APP_API_BASE_URL;
+    console.log(`Using '${base}' as API base url`);
+
     this.http = axios.create({
-      baseURL: "http://localhost:8081/api/",
+      baseURL: base,
       headers: {
         "Content-Type": "application/json"
       }
