@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="message" placeholder="Be nice!" type="text" v-on:keydown="validateText" />
+    <input v-model="message" placeholder="Be nice!" type="text" v-on:keydown="keydownEvent" />
     <a href="#" @click="sendMessage">Send</a>
   </div>
 </template>
@@ -44,6 +44,13 @@ export default {
       }
 
       return tooLong
+    },
+    keydownEvent(e) {
+      this.validateText();
+
+      if (e.keyCode === 13) { // Enter
+        this.sendMessage();
+      }
     }
   }
 }
