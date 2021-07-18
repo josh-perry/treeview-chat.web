@@ -101,6 +101,7 @@ a {
 .expando-button {
   width: 16px;
   display: inline-block;
+  text-decoration: none;
 }
 
 .reply-box {
