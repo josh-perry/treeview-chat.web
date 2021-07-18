@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>tree</h1>
+    <h1>🌲 Chat</h1>
     <ChatNode :message="rootMessage" />
   </div>
 </template>
