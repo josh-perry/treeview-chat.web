@@ -7,7 +7,8 @@
       </a>
 
       <span v-if="message.sticky" class="emoji">📌</span>
-      <span class="content">{{ message.content }}</span>
+      <span v-if="message.sticky" class="content" v-html="message.content"></span>
+      <span v-if="!message.sticky" @click.prevent="toggleExpanded" class="content">{{ message.content }}</span>
 
       <a v-if="expanded" href="#" class="reply-button" @click.prevent="replyBoxShowing = !replyBoxShowing">✉️</a>
     </div>
@@ -89,7 +90,7 @@ a {
 
 .reply-button {
   width: 16px;
-  padding: 16px;
+  padding-left: 16px;
 }
 
 .expando-button {
