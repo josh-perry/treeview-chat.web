@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="message-line">
-      <a class="expando-button" href="#" @click.prevent="toggleExpanded">
+      <a v-if="!message.sticky" class="expando-button" href="#" @click.prevent="toggleExpanded">
         <span v-if="!expanded">➤</span>
         <span v-if="expanded">▼</span>
       </a>
 
-      <span>{{ message.content }}</span>
+      <span v-if="message.sticky" class="emoji">📌</span>
+      <span class="content">{{ message.content }}</span>
 
       <a v-if="expanded" href="#" class="reply-button" @click.prevent="replyBoxShowing = !replyBoxShowing">✉️</a>
     </div>
@@ -69,7 +70,9 @@ export default {
       }
 
       const { data } = await messageHttpService.getMessages(this.message.id);
-      this.children = data;
+      this.children = data.sort((x, y) => {
+        return y.sticky - x.sticky
+      });
     },
     newMessage() {
       this.replyBoxShowing = false;
@@ -104,5 +107,10 @@ a {
 
 .empty-node-message {
   padding-left: 32px;
+}
+
+.emoji {
+  padding-right: 16px;
+  width: 16px;
 }
 </style>
