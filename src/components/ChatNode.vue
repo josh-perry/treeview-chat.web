@@ -8,7 +8,7 @@
 
       <span>{{ message.content }}</span>
 
-      <a v-if="expanded" href="#" class="reply-button" @click.prevent="replyBoxShowing = !replyBoxShowing">✉</a>
+      <a v-if="expanded" href="#" class="reply-button" @click.prevent="replyBoxShowing = !replyBoxShowing">✉️</a>
     </div>
 
     <div v-if="replyBoxShowing && expanded" class="reply-box">
@@ -17,9 +17,16 @@
     </div>
 
     <div class="children">
-      <ChatNode v-for="child in children"
-                v-bind:key="child.id"
-                :message="child" />
+      <div v-if="children.length > 0">
+        <ChatNode v-for="child in children"
+                  v-bind:key="child.id"
+                  :message="child" />
+      </div>
+
+      <div class="empty-node-message"
+           v-if="children.length === 0 && expanded">
+        <span><i>Nothing here yet. <a href="#" @click.prevent="replyBoxShowing = !replyBoxShowing">Write something?</a></i></span>
+      </div>
     </div>
   </div>
 </template>
@@ -92,6 +99,10 @@ a {
 }
 
 .children {
+  padding-left: 32px;
+}
+
+.empty-node-message {
   padding-left: 32px;
 }
 </style>
