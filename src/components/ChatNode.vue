@@ -1,9 +1,13 @@
 <template>
   <div>
     <div class="message-line">
-      <a v-if="!message.sticky" class="expando-button" href="#" @click.prevent="toggleExpanded">
-        <span v-if="!expanded">➤</span>
+      <a v-if="!message.sticky && !expanded" class="expando-button" href="#" @click.prevent="toggleExpanded">
+        ➤
         <span v-if="expanded">▼</span>
+      </a>
+
+      <a v-if="!message.sticky && expanded" class="expando-button" href="#" @click.prevent="toggleExpanded">
+        ▼
       </a>
 
       <span v-if="message.sticky" class="emoji">📌</span>
@@ -91,6 +95,7 @@ a {
 .reply-button {
   width: 16px;
   padding-left: 16px;
+  text-decoration: none;
 }
 
 .expando-button {

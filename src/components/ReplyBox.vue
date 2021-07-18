@@ -1,7 +1,7 @@
 <template>
   <div>
     <input v-model="message" placeholder="Be nice!" type="text" v-on:keydown="validateText" />
-    <button @click="sendMessage">Send</button>
+    <a href="#" @click="sendMessage">Send</a>
   </div>
 </template>
 
@@ -48,3 +48,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+input {
+  background-color: rgb(30, 30, 30);
+  margin-right: 16px;
+}
+</style>
