@@ -54,13 +54,29 @@ export default {
           content: "Nothing here yet"
         }
       }
+    },
+    expandedByDefault: {
+      type: Boolean,
+      default() {
+        return false
+      }
+    }
+  },
+  created() {
+    this.expanded = this.expandedByDefault
+  },
+  watch: {
+    message() {
+      if (this.expanded) {
+        this.refetchData()
+      }
     }
   },
   data() {
     return {
       children: [],
-      expanded: false,
-      replyBoxShowing: false
+      replyBoxShowing: false,
+      expanded: false
     }
   },
   methods: {

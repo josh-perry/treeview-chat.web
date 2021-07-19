@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>🌲 Chat</h1>
-    <ChatNode :message="rootMessage" />
+    <ChatNode :message="rootMessage" :expandedByDefault="true" />
   </div>
 </template>
 
