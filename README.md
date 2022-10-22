@@ -6,7 +6,8 @@
 A quick experiment with a Vue frontend (this repository) and Express [backend API](https://github.com/josh-perry/treeview-chat.api) that is an anonymous chat presented in a tree. Any comment node can be expanded by leaving an anonymous comment of your own with no registration.
 
 ## Demo
-The demo is hosted on Heroku [here](https://treeview-chat-web.herokuapp.com/). Every day at midnight (UTC) the database is wiped.
+~~The demo is hosted on Heroku [here](https://treeview-chat-web.herokuapp.com/). Every day at midnight (UTC) the database is wiped.~~
+Nevermind, Heroku no longer provides a free tier.
 
 ## Technologies
 ### Web
